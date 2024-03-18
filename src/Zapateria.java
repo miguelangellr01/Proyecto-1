@@ -1,5 +1,5 @@
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
+//import javax.swing.ImageIcon;
 import java.util.Scanner;
 
 public class Zapateria {
@@ -15,31 +15,14 @@ public class Zapateria {
         Double total = 0.0;
         
         String categorias[] = {"Niña","Niño","Mujer","Hombre","Ver todos los productos"};
-        //ImageIcon icono = new ImageIcon("bin/IMG_0523.jpg");
-        //JOptionPane.showMessageDialog(null, "Foto de Hu tao", "Hu Tao", JOptionPane.INFORMATION_MESSAGE, icono);
-
-        //funciones();
-
-        //JOptionPane.showMessageDialog(null, "Soy una ventana emergente");
+        String opciones[] = {"Ver catalogo","Conoce tu talla","Canjear un codigo","Dedicado a mi novia hermosa Kathya<3","Salir"};
 
         do{
 
-           /*  System.out.println("Bienvenido a la zapateria 3 hermanos");
-            System.out.println("Que opcion desea realizar?");
-            System.out.println("1) Ver catalogo");
-            System.out.println("2) Conoce tu talla");
-            System.out.println("3) Canjear un codigo");
-            System.out.println("4) Dedicado a mi novia hermosa Kathya<3");
-            System.out.println("5) Salir");
-            
-            opcion = respuesta.nextInt();*/
-            opcion = JOptionPane.showInputDialog(null,
-            "Que opcion desea realizar? \n"
-            + "1) Ver catalogo \n"
-            + "2) Conoce tu talla \n"
-            + "3) Canjear un codigo \n"
-            + "4) Dedicado a mi novia hermosa Kathya<3 \n"
-            + "5) Salir");
+            opcion = (String) JOptionPane.showInputDialog(null,
+            "Que opcion desea realizar? \n",
+            "Menu Principal",
+            JOptionPane.DEFAULT_OPTION, null, opciones,opciones); 
             int contador = 0;
 
             String Products[] = {"Zapatos Shein color rosa, talla 8", "Sadak Huarache frozen con tacon, talla 9", "Zapatos shein color negro de vestir, talla 9", "Tenis de moda girls attitude color rosa, talla 8"," Tenis Nike Court Borought color rosa, talla 10",/*Termina Productos Nina */ 
@@ -58,19 +41,12 @@ public class Zapateria {
             productos = new String[10];
     
             switch (opcion) {
-                case "1":
-                   /* System.out.println("A continuacion se muestras las suiguientes categorias:");
-                    System.out.println("1)Niña");
-                    System.out.println("2)Niño");
-                    System.out.println("3)Mujer");
-                    System.out.println("4)Hombre");
-                    System.out.println("5)Ver todos los Productos");
-
-                    opcion = respuesta.nextInt();*/
+                case "Ver catalogo":
 
                    opcion = (String) JOptionPane.showInputDialog(null,
                     "Eliga",
-                    "Menu", JOptionPane.DEFAULT_OPTION, null, categorias,categorias); 
+                    "Menu De Categorias",
+                     JOptionPane.DEFAULT_OPTION, null, categorias,categorias); 
     
                     switch (opcion) {
                         case "Niña":
@@ -156,7 +132,7 @@ public class Zapateria {
 
                 break;
                 
-                case "2":
+                case "Conoce tu talla":
                     System.out.println("Bienvenido al modulo para conocer tu talla");
                     System.out.println("Antes de comenzar indique si es honbre o mujer (H/M)");
                     String Sexo = respuesta.next();
@@ -173,7 +149,7 @@ public class Zapateria {
     
                 break;
                
-                case "3":
+                case "Canjear un codigo":
 
                     System.out.println("Bienvenido al menu de codigos canjeables");
                     System.out.println("Tiene usted un codigo de canje? (y/n)");
@@ -189,19 +165,15 @@ public class Zapateria {
 
                 break;
 
+                case "Salir":
+                        JOptionPane.showMessageDialog(null, "Vuelva Pronto", "Mensaje de Salida", JOptionPane.INFORMATION_MESSAGE);
+                break;
                 default:
-                    System.out.println("Escribe un valor valido");
+                    System.out.println("En construccion, buen dia");
                 break;
             }    
-        }while (opcion!="5");
+        }while (opcion!="Salir");
         //do while se refiere a repetir mientras la condicion se cumpla
-        
-    }
-
-    private static void funciones() {
-        // soy una funcion
-        //JOptionPane.showMessageDialog(null,"mensaje", "titulo", joptionpane.icono);
-        JOptionPane.showMessageDialog(null,"No se acptan peruanos", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         
     }
 }
