@@ -68,33 +68,30 @@ public class Zapateria {
 
                     opcion = respuesta.nextInt();*/
 
-                   opcion = JOptionPane.showInputDialog(null,
-                     "1) Niña \n" 
-                    + "2) Niño \n"
-                    + "3) Mujer \n"
-                    + "4) Hombre \n"
-                    + "5) Ver todos los productos" ); 
+                   opcion = (String) JOptionPane.showInputDialog(null,
+                    "Eliga",
+                    "Menu", JOptionPane.DEFAULT_OPTION, null, categorias,categorias); 
     
                     switch (opcion) {
-                        case "1":
+                        case "Niña":
                             System.out.println("Aqui estan los productos de Niña");
                             JOptionPane.showInputDialog(null,Products,"Mensaje");
                             
                         break;
-                        case "2":
+                        case "Niño":
                             System.out.println("Aqui estan los productos de Niño");
                              for (int inicio = 5; inicio < 9; inicio++){
                                 System.out.println("No.Articulo: " + (inicio+1) + ".-" + Products[inicio] + " Precio: " + precioProduct[inicio]);
                             }
 
                         break;
-                        case "3":
+                        case "Mujer":
                             System.out.println("Aqui estan los productos de Mujer");
                              for (int inicio = 9; inicio < 14; inicio++){
                                 System.out.println("No.Articulo: " + (inicio+1) + ".-" + Products[inicio] + " Precio: " + precioProduct[inicio]);
                             }
                         break;
-                        case "4":
+                        case "Hombre":
                             System.out.println("Aqui estan los productos de Hombre");
                              for (int inicio = 14; inicio < 20; inicio++){
                                 System.out.println("No.Articulo: " + (inicio+1) + ".-" + Products[inicio] + " Precio: " + precioProduct[inicio]);
