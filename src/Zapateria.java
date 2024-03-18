@@ -159,6 +159,9 @@ public class Zapateria {
                         System.out.println("Ingrese el codigo de canje");
                         codigo = numeros.nextDouble();
 
+                        if (codigo!=277353){
+                            JOptionPane.showInputDialog(null, "Tu codigo es invalido, desea intentar de nuevo?");
+                        }
                     }else{
                         System.out.println("Tu ere pobre no tiene aifon");
                     }
@@ -169,7 +172,7 @@ public class Zapateria {
                         JOptionPane.showMessageDialog(null, "Vuelva Pronto", "Mensaje de Salida", JOptionPane.INFORMATION_MESSAGE);
                 break;
                 default:
-                    System.out.println("En construccion, buen dia");
+                    JOptionPane.showMessageDialog(null,"Eres lo mas hermoso y bonito que me ha pasado en la vida amor\n te amo tanto y es enserio cuando lo digo y que eres mi princesa hermosa, preciosa, mi bb,\n mi todo mi amorcito\n TE AMOOOOOOOOOO!!!!!!!");
                 break;
             }    
         }while (opcion!="Salir");
