@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class Zapateria {
 
@@ -167,7 +168,7 @@ public class Zapateria {
                             }
                         }
                     
-                    if (codigo == 277353 ) {
+                    if (codigo == 277353 || codigo == 54321 ) {
                         Total = Total*0.9;
                         // Agregar el total al mensaje
                         mensaje.append("\nTienes descuento del 10%");
@@ -176,11 +177,16 @@ public class Zapateria {
                         mensaje.append("\nTotal: ").append(Total);
                     }
 
-                    // Mostrar la cadena en un JOptionPane
-                    JOptionPane.showMessageDialog(null, mensaje.toString(), "Lista de Productos y Total", JOptionPane.INFORMATION_MESSAGE);
+                    //LA sigueinye linea modifca el texto del ok cancel donde en vez de decir
+                    //ok dira pagar
+                    UIManager.put("JOptionPane.okButtonText", "Pagar");
+                    UIManager.put("JOptionPane.cancelButtonText", "Cacnelar Compra");
+                    JOptionPane.showConfirmDialog(null, mensaje.toString(), "Lista de Productos y Total", JOptionPane.OK_CANCEL_OPTION);
 
                 } else if (e.getSource() == cancelar){
-                    JOptionPane.showMessageDialog(null, "Apretaste que no quieres", "Cancelar", 0);
+                    //JOptionPane.showMessageDialog(null, "Apretaste que no quieres", "Cancelar", 0);
+                    f.dispose();
+                    //dispose cierra la ventana, es decirla elimina para no consumir memoria
                 }
                 
             }
@@ -193,6 +199,8 @@ public class Zapateria {
     
 
     public static void main(String[] args) {
+        System.out.flush();
+        //limpia los datos de la consola que vienen por defecto
         
         Scanner respuesta = new Scanner(System.in);
         /*Scanner donde leeremos las respuestas */
@@ -289,19 +297,13 @@ public class Zapateria {
                 break;
                
                 case "Canjear un codigo":
-                    // codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su codigo"));
-                    //codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su codigo"));
-                    //System.out.println("Bienvenido al menu de codigos canjeables");
-                    //System.out.println("Tiene usted un codigo de canje? (y/n)");
-                    //String resp = respuesta.next();
-                    
-                        System.out.println("Ingrese el codigo de canje");
-                        codigo = numeros.nextInt();
+                    codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su codigo"));
+                   
                         /*Si la respuesta es si a tener un codigo de canje preguntara cual es y verificara 
-                         * si es igual al codigo de descuentos, sino arrojara otro mensaje
-                         */
-                        if (codigo!=277353){
-                            JOptionPane.showInputDialog(null, "Tu codigo es invalido, desea intentar de nuevo?");
+                        * si es igual al codigo de descuentos, sino arrojara otro mensaje
+                        */
+                        if (codigo!=277353 && codigo!=54321){
+                            JOptionPane.showMessageDialog(null, "Tu codigo es invalido");
                             /*En dado que no sea arroja una ventana donde dice que no es correcto y pregunta si desea continuar */
                         }
 
