@@ -1,10 +1,17 @@
-import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
-/* */
+
+import javax.swing.JButton;
+//import java.lang.Double;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class Zapateria {
 
-    Zapateria(String opcioString){
+    Zapateria(String opcioString, int codigo){
+
         String Products[] = {"Zapatos Shein color rosa, talla 8", "Sadak Huarache frozen con tacon, talla 9", "Zapatos shein color negro de vestir, talla 9", "Tenis de moda girls attitude color rosa, talla 8"," Tenis Nike Court Borought color rosa, talla 10",/*Termina Productos Nina */ 
             "Nautica Spinnaker Plebbed plano color blanco, talla 9", "Landhiker color blanco, talla 10", "Marvel botines de spiderman talla 9", "Bruno Marc zappatos Oxford de vestir, talla 9", "Tenis casual para niño Rokino Modelo 3186, talla 11", /*Termina Productos Nino */
             "Dream paris color blanco, talla 24", "Atoshopce color negro, talla 23", "Madden girl color durazno, talla 25", "Shoe land color negro, talla 24", "GUESS loven color blanco, talla 23", /*Termina Productos Mujer */
@@ -22,114 +29,168 @@ public class Zapateria {
 
         f.setLayout(null);
 
+        int contador = 0;
         int altura = 0;
         //altura igual a cero para que no se acumula o provoque errores dentro del for
+        JCheckBox caja[];
+        caja = new JCheckBox[20];
+        int precio[];
+        precio = new int[10];
+        String CompraProductos[];
+        CompraProductos = new String[10];
 
-        switch (opcioString) {
-        // el Switch me da control sobre las opcione que elige el usuario en el menu desplegable sobre que productos ver
-
-            case "Niña":
-            // cada caso va en String que corresponde a los datos del menu desplegable, son opciones unicas
-                for(int i = 0; i<5;i++){
-                    /*Dentro del for vamos de 5 en 5 empezando desde cero porque son 5 articulos por categoria 
-                     *y los numeros de i se los asignaremos a los checkbox para que guarden el nombre y precio de cada uno 
-                     */
-                    JCheckBox caja1 = new JCheckBox(Products[i] + " Prewcio: " + precioProduct[i]);
-                    /*JCheckbox es la declaracion de un checkbox, donde le asignamos un nombre de variable, despes del 
-                     * igual utilzamos lo que es new JchechkBox para indicar que es un nuevo objeto o vista
-                     * y dentro del parentesis le damos el valor que queremos darle
-                     */
-                    altura += 30;
-                    caja1.setBounds(20,altura,500,50);
-                    /*setBounds se encarga de acomodar la vista u objerto en algun lado del Jframe o ventana
-                     * donde existen 4 valores, (x, y, ancho, largo) y acomodarlos como en un plano cartesiano
-                     * dandole valores a x, y para acomodarlos y darles un ancho y largo y que no choquen entre si 
-                     * o no se muestren completos los escritos
-                     */
-                    caja1.setVisible(true);
-                    /*setVisible se encarga de hacerlos visibles, ya que aveces falla y solo se ve el primero o uno a la vez */
-                    f.add(caja1);
-                    /*Con este ultimo agregamos nuestra caja, objeto o vista a la ventana con todos los valores que le dimos
-                     * por eso va al ultimo
-                     */
-                }
-            break;
-            case "Niño":
-                for (int i = 5; i < 10; i++) {
-                    JCheckBox caja2 = new JCheckBox(Products[i] + " Prewcio: " + precioProduct[i]);
-                    altura += 30;
-                    caja2.setBounds(20,altura,500,50);
-                    caja2.setVisible(true);
-                    f.add(caja2);
-                }
-            break;
-            case "Mujer":
-                for(int i = 10; i<15;i++){
-                    JCheckBox caja3 = new JCheckBox(Products[i] + " Prewcio: " + precioProduct[i]);
-                    altura += 30;
-                    caja3.setBounds(20,altura,500,50);
-                    caja3.setVisible(true);
-                    f.add(caja3);
-                }
-            break;
-            case "Hombre":
-                for(int i = 15; i<20;i++){
-                    JCheckBox caja4 = new JCheckBox(Products[i] + " Prewcio: " + precioProduct[i]);
-                    altura += 30;
-                    caja4.setBounds(20,altura,500,50);
-                    caja4.setVisible(true);
-                    f.add(caja4);
-                }
-            break;
-
-            case null:
-            // el caso null es si el usuario da cancelar en la ventana emergente
-            // al ser un JOptionPane hay una opcion que el usuario cierre la ventana o de cancelar    
-                caseNull();
-                /*Mandamos a llamar nuestra funcion que sirve para casos nulos o vacios */
-            break;
-
-            default:
-                for(int i = 0; i<20;i++){
-                    JCheckBox TodaCaja = new JCheckBox(Products[i] + " Precio: " + precioProduct[i]);
-                    altura += 30;
-                    TodaCaja.setBounds(20,altura,500,50);
-                    TodaCaja.setVisible(true);
-                    f.add(TodaCaja);
-                    /*En caso de no elegir las otras opciones solo queda la de ver todos los productos, que nos muestra 
-                     * los 20 articulos que tenemoscon el mismo formato
-                     */
-                }
-            break;
+            switch (opcioString) {
+                // el Switch me da control sobre las opcione que elige el usuario en el menu desplegable sobre que productos ver
+        
+                    case "Niña":
+                    // cada caso va en String que corresponde a los datos del menu desplegable, son opciones unicas
+                        for(int i = 0; i<5;i++){
+                            /*Dentro del for vamos de 5 en 5 empezando desde cero porque son 5 articulos por categoria 
+                             *y los numeros de i se los asignaremos a los checkbox para que guarden el nombre y precio de cada uno 
+                             */
+                            caja[i] = new JCheckBox(Products[i] + " Precio: " + precioProduct[i]);
+                            /*JCheckbox es la declaracion de un checkbox, donde le asignamos un nombre de variable, despes del 
+                             * igual utilzamos lo que es new JchechkBox para indicar que es un nuevo objeto o vista
+                             * y dentro del parentesis le damos el valor que queremos darle
+                             */
+                            altura += 30;
+                            caja[i].setBounds(20,altura,500,30);
+                            /*setBounds se encarga de acomodar la vista u objerto en algun lado del Jframe o ventana
+                             * donde existen 4 valores, (x, y, ancho, largo) y acomodarlos como en un plano cartesiano
+                             * dandole valores a x, y para acomodarlos y darles un ancho y largo y que no choquen entre si 
+                             * o no se muestren completos los escritos
+                             */
+                            caja[i].setVisible(true);
+                            /*setVisible se encarga de hacerlos visibles, ya que aveces falla y solo se ve el primero o uno a la vez */
+                            f.add(caja[i]);
+                            /*Con este ultimo agregamos nuestra caja, objeto o vista a la ventana con todos los valores que le dimos
+                             * por eso va al ultimo
+                             */
+                            contador +=1;
+                        }
+                    break;
+                    case "Niño":
+                        for (int i = 5; i < 10; i++) {
+                            caja[i] = new JCheckBox(Products[i] + " Precio: " + precioProduct[i]);
+                            altura += 30;
+                            caja[i].setBounds(20,altura,500,30);
+                            caja[i].setVisible(true);
+                            f.add(caja[i]);
+                            contador +=1;
+                        }
+                    break;
+                    case "Mujer":
+                        for(int i = 10; i<15;i++){
+                            caja[i] = new JCheckBox(Products[i] + " Precio: " + precioProduct[i]);
+                            altura += 30;
+                            caja[i].setBounds(20,altura,500,30);
+                            caja[i].setVisible(true);
+                            f.add(caja[i]);
+                            contador +=1;
+                        }
+                    break;
+                    case "Hombre":
+                        for(int i = 15; i<20;i++){
+                            caja[i] = new JCheckBox(Products[i] + " Precio: " + precioProduct[i]);
+                            altura += 30;
+                            caja[i].setBounds(20,altura,500,30);
+                            caja[i].setVisible(true);
+                            f.add(caja[i]);
+                            contador +=1;
+                        }
+                    break;
+                    default:
+                        for(int i = 0; i<20;i++){
+                            caja[i] = new JCheckBox(Products[i] + " Precio: " + precioProduct[i]);
+                            altura += 30;
+                            caja[i].setBounds(20,altura,400,30);
+                            caja[i].setVisible(true);
+                            f.add(caja[i]);
+                            /*En caso de no elegir las otras opciones solo queda la de ver todos los productos, que nos muestra 
+                             * los 20 articulos que tenemoscon el mismo formato
+                             */
+                            contador +=1;
+                        }
+                    break;
             }
+            
+        final int limite = contador;
+
         JCheckBox no = new JCheckBox("No Comprar Nada");   
         altura += 30;
-        no.setBounds(20, altura, 500, 50); 
+        no.setBounds(20, altura, 400, 30); 
         no.setVisible(true);
         f.add(no);
 
         JButton aceptar = new JButton("Comprar");
         /*boton para interactuar con la ventana y los checkboxs entre parentesis el titulo del boton */
-        aceptar.setBounds(250, 250, 100, 50);
+        aceptar.setBounds(500, altura, 100, 50);
         /*Medidas y posicion de nuestro boton */
         aceptar.setVisible(true);
         /*Ver visible el boton */
-        f.add(aceptar);
         /*Agregar el boton */
-        //aceptar.addActionListener((ActionListener) this);
+        f.add(aceptar);
 
         JButton cancelar = new JButton("Cancelar Compra");
-        cancelar.setBounds(360, 250, 200, 50);
+        cancelar.setBounds(610, altura, 200, 50);
         cancelar.setVisible(true);
-        f.add(cancelar);
         //cancelar.addActionListener((ActionListener) this);
+        f.add(cancelar);
 
-        f.setSize(600,600);
+        f.setSize(850,altura + 100);
         /*El tamano que tendra de nuetra ventana por default*/
         f.setVisible(true);
         /*Ver la ventana, que sea visible */
         
+        ActionListener botones = new ActionListener(){
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                StringBuilder mensaje = new StringBuilder();
+                //para armar textos o sintaxis/formatos,  es parecido a StringFormat
+                int cont = 0;
+                if (e.getSource() == aceptar){
+                    Double Total = 0.0;
+                    for (int i = 0; i<limite; i++){
+                        if (caja[i].isSelected() && cont<10){
+                            CompraProductos[i] = Products[i];
+                            precio[i] = precioProduct[i];
+                            Total += precio[i];
+                            cont += 1;
+                        }
+                    }
+
+                    mensaje.append("Productos seleccionados:\n");
+                        for (int i = 0; i < limite; i++) {
+                            if (CompraProductos[i] != null && precio[i] != 0) {
+                                mensaje.append(CompraProductos[i]).append(" - Precio: ").append(precio[i]).append("\n");
+                            }
+                        }
+                    
+                    if (codigo == 277353 ) {
+                        Total = Total*0.9;
+                        // Agregar el total al mensaje
+                        mensaje.append("\nTienes descuento del 10%");
+                        mensaje.append("\nTotal: ").append(Total);
+                    }else{
+                        mensaje.append("\nTotal: ").append(Total);
+                    }
+
+                    // Mostrar la cadena en un JOptionPane
+                    JOptionPane.showMessageDialog(null, mensaje.toString(), "Lista de Productos y Total", JOptionPane.INFORMATION_MESSAGE);
+
+                } else if (e.getSource() == cancelar){
+                    JOptionPane.showMessageDialog(null, "Apretaste que no quieres", "Cancelar", 0);
+                }
+                
+            }
+        };
+        aceptar.addActionListener(botones);
+        cancelar.addActionListener(botones);
+        
     }
+
+    
 
     public static void main(String[] args) {
         
@@ -184,7 +245,7 @@ public class Zapateria {
             int precio[];
             precio = new int[10];
             productos = new String[10];
-            /*variables donde guardamos los articulosque compro el usuario, nombre y producto*/
+            /*variables donde guardamos los articulos que compro el usuario, nombre y producto*/
     
             switch (opcion) {
                 case "Ver catalogo":
@@ -195,69 +256,10 @@ public class Zapateria {
                      JOptionPane.DEFAULT_OPTION, null, categorias,categorias); 
                     /*Menu desplagable de las categorias */
 
-                    new Zapateria(opcion);
-                    /*llamamos la funcion de zapateria donde tenemos el switch segun la accion
-                     * 
-                     */
-                   
-                    do {
-                        if (contador == limite)  {
-                            /*este if dice que si contador es igual a limite ha llegado al limite de compras */
-                            System.out.println("Has Alcanzado el limite de articulos");
-                            Opt = "N";
-                            /*la opt N marca el fin del ciclo do while dejando de preguntar o hacer el ciclo */
-                        }else{                            
-                            System.out.println("Desea comprar algo del catalogo? (Y/N)");
-                            Opt = respuesta.next();
-                        }
-
-                        if (Opt.equals("Y")){
-                            /*Mientras Opt sea Y seguira comprando o ejecutanto el ciclo */
-                            if (contador !=0){
-                                System.out.println("Recuerde solo puede comprar un maximo de 10 articulos");
-                                System.out.println("Que otro producto desea comprar?");
-                            }else{
-                                System.out.println("Solo puede comprar un maximo de 10 articulos");
-                                System.out.println("Que producto desea comprar?");
-                            }
-                                int articulos = Articulos.nextInt();    
-                                productos[contador] =  Products[articulos-1];
-                                precio[contador] = precioProduct[articulos-1];
-                                total = total + precio[contador];
-                                /*Toma los datos ingresados por el usuario
-                                 * -numero de articulo
-                                 * -el precio segun el numero de articulo que eligio
-                                 * -calcula el total 
-                                 */
-                                contador += 1;
-                                /*LLeva un control de las veces que se hace este proceso, para marcar el limite */
-                                
-                        }   
-                        
-                    } while (Opt.equals("Y"));
-                    
-    
-                    if (contador!=0){
-                        System.out.println("Usted compro:");
-                        for (int i = 0; i<contador;i++){
-                            /*Indica en cada iteracion el producto que eligio por orden de modificacion
-                             * es decir en el orden que los eligio con su respectivo precio
-                             */
-                            System.out.println(productos[i] + " Precio: " + precio[i]);
-
-                        }
-
-                        System.out.print("\n Su total es de: ");
-                        if (codigo == 277353 ) {
-                            total = total*0.9;
-                            System.out.println(total);
-                            System.out.println("Tuvo un descuento del 10%");
-                            /*Muestra el total dependiendo de si ingreso el codigo de descuento */
-                        }else{
-                            /*sino muestra el total entero */
-                            System.out.println(total);
-                        }
-                    }                      
+                    new Zapateria(opcion, codigo);
+                    /*llamamos la funcion de zapateria donde tenemos el switch segun la accion*/
+                              
+                    opcion ="Salir";
 
                 break;
                 
@@ -288,11 +290,11 @@ public class Zapateria {
                
                 case "Canjear un codigo":
 
-                    System.out.println("Bienvenido al menu de codigos canjeables");
-                    System.out.println("Tiene usted un codigo de canje? (y/n)");
-                    String resp = respuesta.next();
+                    //codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su codigo"));
+                    //System.out.println("Bienvenido al menu de codigos canjeables");
+                    //System.out.println("Tiene usted un codigo de canje? (y/n)");
+                    //String resp = respuesta.next();
                     
-                    if (resp.equals("y")) {
                         System.out.println("Ingrese el codigo de canje");
                         codigo = numeros.nextInt();
                         /*Si la respuesta es si a tener un codigo de canje preguntara cual es y verificara 
@@ -302,10 +304,6 @@ public class Zapateria {
                             JOptionPane.showInputDialog(null, "Tu codigo es invalido, desea intentar de nuevo?");
                             /*En dado que no sea arroja una ventana donde dice que no es correcto y pregunta si desea continuar */
                         }
-                    }else{
-                        System.out.println("Tu ere pobre no tiene aifon");
-                        /*Sino tiene codigo o la respuesta es n arrojara un mensaje */
-                    }
 
                 break;
 
@@ -330,4 +328,5 @@ public class Zapateria {
             y con eso tenemos un simple messagebox pero para poner titulo lo ponemos entreparentesis seguido de la coma, y despues usamos
             el tipo de mensaje que es, ya que al tener titulo necesita un icono, por ejemplo advertencia, info, salir, aceptar etc. */    
     }
+
 }
