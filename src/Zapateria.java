@@ -289,7 +289,7 @@ public class Zapateria {
                 break;
                
                 case "Canjear un codigo":
-
+                    // codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su codigo"));
                     //codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su codigo"));
                     //System.out.println("Bienvenido al menu de codigos canjeables");
                     //System.out.println("Tiene usted un codigo de canje? (y/n)");
