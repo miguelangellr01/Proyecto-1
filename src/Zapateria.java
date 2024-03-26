@@ -36,9 +36,9 @@ public class Zapateria {
         JCheckBox caja[];
         caja = new JCheckBox[20];
         int precio[];
-        precio = new int[10];
+        precio = new int[20];
         String CompraProductos[];
-        CompraProductos = new String[10];
+        CompraProductos = new String[20];
 
             switch (opcioString) {
                 // el Switch me da control sobre las opcione que elige el usuario en el menu desplegable sobre que productos ver
@@ -151,44 +151,50 @@ public class Zapateria {
                 //para armar textos o sintaxis/formatos,  es parecido a StringFormat
                 int cont = 0;
                 if (e.getSource() == aceptar){
-                    Double Total = 0.0;
-                    for (int i = 0; i<limite; i++){
-                        if (caja[i].isSelected() && cont<10){
-                            CompraProductos[i] = Products[i];
-                            precio[i] = precioProduct[i];
-                            Total += precio[i];
-                            cont += 1;
-                        }
-                    }
 
-                    mensaje.append("Productos seleccionados:\n");
-                        for (int i = 0; i < limite; i++) {
-                            if (CompraProductos[i] != null && precio[i] != 0) {
-                                mensaje.append(CompraProductos[i]).append(" - Precio: ").append(precio[i]).append("\n");
+                    if (no.isSelected()) {
+                        JOptionPane.showMessageDialog(null,"Has precionado no comprar nada, tus elecciones se borraran", "No comprar",0);
+                    }else {
+
+                        Double Total = 0.0;
+                        for (int i = 0; i<limite; i++){
+                            if (caja[i].isSelected() && cont<10){
+                                CompraProductos[i] = Products[i];
+                                precio[i] = precioProduct[i];
+                                Total += precio[i];
+                                cont += 1;
                             }
                         }
-                    
-                    if (codigo == 277353 || codigo == 54321 ) {
-                        Total = Total*0.9;
-                        // Agregar el total al mensaje
-                        mensaje.append("\nTienes descuento del 10%");
-                        mensaje.append("\nTotal: ").append(Total);
-                    }else{
-                        mensaje.append("\nTotal: ").append(Total);
+
+                        mensaje.append("Productos seleccionados:\n");
+                            for (int i = 0; i < limite; i++) {
+                                if (CompraProductos[i] != null && precio[i] != 0) {
+                                    mensaje.append(CompraProductos[i]).append(" - Precio: ").append(precio[i]).append("\n");
+                                }
+                            }
+                        
+                        if (codigo == 277353 || codigo == 54321 ) {
+                            Total = Total*0.9;
+                            // Agregar el total al mensaje
+                            mensaje.append("\nTienes descuento del 10%");
+                            mensaje.append("\nTotal: ").append(Total);
+                        }else{
+                            mensaje.append("\nTotal: ").append(Total);
+                        }
+
+                        //LA sigueinye linea modifca el texto del ok cancel donde en vez de decir
+                        //ok dira pagar
+                        UIManager.put("JOptionPane.okButtonText", "Pagar");
+                        UIManager.put("JOptionPane.cancelButtonText", "Cacnelar Compra");
+                        JOptionPane.showConfirmDialog(null, mensaje.toString(), "Lista de Productos y Total", JOptionPane.OK_CANCEL_OPTION);
+
                     }
 
-                    //LA sigueinye linea modifca el texto del ok cancel donde en vez de decir
-                    //ok dira pagar
-                    UIManager.put("JOptionPane.okButtonText", "Pagar");
-                    UIManager.put("JOptionPane.cancelButtonText", "Cacnelar Compra");
-                    JOptionPane.showConfirmDialog(null, mensaje.toString(), "Lista de Productos y Total", JOptionPane.OK_CANCEL_OPTION);
-
-                } else if (e.getSource() == cancelar){
+                }else if (e.getSource() == cancelar){
                     //JOptionPane.showMessageDialog(null, "Apretaste que no quieres", "Cancelar", 0);
                     f.dispose();
                     //dispose cierra la ventana, es decirla elimina para no consumir memoria
-                }
-                
+                    }
             }
         };
         aceptar.addActionListener(botones);
@@ -213,7 +219,7 @@ public class Zapateria {
         /*opcion para los menus */
         String Opt = "";
         /*opcion para el control de las compras, pudiendo comprar un maximo */
-        int codigo = 0;
+        int codigo = 0;//
         /* para validar Codigo de descuento */
         Double total = 0.0;
         /*Calcular el total, con decimales si se usa el codigo de descuento */
@@ -297,15 +303,22 @@ public class Zapateria {
                 break;
                
                 case "Canjear un codigo":
-                    codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su codigo"));
-                   
-                        /*Si la respuesta es si a tener un codigo de canje preguntara cual es y verificara 
-                        * si es igual al codigo de descuentos, sino arrojara otro mensaje
-                        */
-                        if (codigo!=277353 && codigo!=54321){
-                            JOptionPane.showMessageDialog(null, "Tu codigo es invalido");
-                            /*En dado que no sea arroja una ventana donde dice que no es correcto y pregunta si desea continuar */
+                    
+                    /*Si la respuesta es si a tener un codigo de canje preguntara cual es y verificara 
+                    * si es igual al codigo de descuentos, sino arrojara otro mensaje
+                    */
+                    try {
+                        codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su codigo"));
+                        if (codigo == 277353 ||codigo ==54321){
+                            JOptionPane.showMessageDialog(null, "Codigo correcto");
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Codigo invalido");
                         }
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                        JOptionPane.showMessageDialog(null, "Tu codigo es invalido");
+                        /*En dado que no sea arroja una ventana donde dice que no es correcto y pregunta si desea continuar */
+                    }
 
                 break;
 
