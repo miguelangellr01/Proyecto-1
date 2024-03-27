@@ -297,6 +297,8 @@ public class Zapateria {
     
                         //System.out.println("Utiliza la regla que se te proporciona en el establecimiento");
                     
+                        String nombre = "svasvqo \n sdvsvbs \n sdhvv \n naksbcksbvk" ;
+                        //nombre.
                         //System.out.println("tabla de tallas \n talla 1 \n talla 2\n talla 3\n"); //mostrar tabla de tallas de ninos
                         if (Sexo == null|| Sexo == "") {
                             caseNull();
@@ -306,7 +308,7 @@ public class Zapateria {
             
                                 //System.out.println("Leon \n No ha hewcho\n La tabla"); 
                                 //muestra las tallas de hombre
-                                JOptionPane.showMessageDialog(null, "Aqui van los datos que va a hacer el miguel", "Talla Hombre",0);
+                                JOptionPane.showMessageDialog(null, "Aqui van los datos que va a hacer el miguel \n" + nombre, "Talla Hombre",0);
                             } else if (Sexo.equals("Mujer")) {
     
                                 //System.out.println("talla 1 \n talla 2\n talla 3"); 
