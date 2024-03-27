@@ -3,7 +3,8 @@ import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 import javax.swing.JButton;
-//import java.lang.Double;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -185,8 +186,10 @@ public class Zapateria {
                         //LA sigueinye linea modifca el texto del ok cancel donde en vez de decir
                         //ok dira pagar
                         UIManager.put("JOptionPane.okButtonText", "Pagar");
-                        UIManager.put("JOptionPane.cancelButtonText", "Cacnelar Compra");
+                        UIManager.put("JOptionPane.cancelButtonText", "Cancelar Compra");
                         JOptionPane.showConfirmDialog(null, mensaje.toString(), "Lista de Productos y Total", JOptionPane.OK_CANCEL_OPTION);
+
+                        pagar(cont, precio, CompraProductos, Total);
 
                     }
 
@@ -261,76 +264,99 @@ public class Zapateria {
             productos = new String[10];
             /*variables donde guardamos los articulos que compro el usuario, nombre y producto*/
     
-            switch (opcion) {
-                case "Ver catalogo":
-
-                   opcion = (String) JOptionPane.showInputDialog(null,
-                    "Eliga",
-                    "Menu De Categorias",
-                     JOptionPane.DEFAULT_OPTION, null, categorias,categorias); 
-                    /*Menu desplagable de las categorias */
-
-                    new Zapateria(opcion, codigo);
-                    /*llamamos la funcion de zapateria donde tenemos el switch segun la accion*/
-                              
-                    opcion ="Salir";
-
-                break;
-                
-                case "Conoce tu talla":
-                    System.out.println("Bienvenido al modulo para conocer tu talla");
-                    System.out.println("Antes de comenzar indique si es hombre, mujer o Infante (H/M/I)");
-                    String Sexo = respuesta.next();
-                    /*Mostrara una tabla segun sea el sexo del cliente o un infante */
-
-                    System.out.println("Utiliza la regla que se te proporciona en el establecimiento");
-                
-                    System.out.println("tabla de tallas \n talla 1 \n talla 2\n talla 3\n"); //mostrar tabla de tallas de ninos
-                    if (Sexo.equals("H")){
+            if (opcion == ""|| opcion == null) {
+                caseNull();
+                opcion = "Salir";
+            }else{
+                switch (opcion) {
+                    case "Ver catalogo":
     
-                        System.out.println("talla 1 \n talla 2\n talla 3"); 
-                        //muestra las tallas de hombre
-                    } else if (Sexo.equals("M")) {
-
-                        System.out.println("talla 1 \n talla 2\n talla 3"); 
-                        //muestra las tallas de mujer
-                    }else{
-
-                        System.out.println("talla 1 \n talla 2\n talla 3"); 
-                        //muestra las tallas de infantes
-                    }
+                       opcion = (String) JOptionPane.showInputDialog(null,
+                        "Eliga",
+                        "Menu De Categorias",
+                         JOptionPane.DEFAULT_OPTION, null, categorias,categorias); 
+                        /*Menu desplagable de las categorias */
     
-                break;
-               
-                case "Canjear un codigo":
+                        new Zapateria(opcion, codigo);
+                        /*llamamos la funcion de zapateria donde tenemos el switch segun la accion*/
+                                  
+                        opcion ="Salir";
+    
+                    break;
                     
-                    /*Si la respuesta es si a tener un codigo de canje preguntara cual es y verificara 
-                    * si es igual al codigo de descuentos, sino arrojara otro mensaje
-                    */
-                    try {
-                        codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su codigo"));
-                        if (codigo == 277353 ||codigo ==54321){
-                            JOptionPane.showMessageDialog(null, "Codigo correcto");
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Codigo invalido");
+                    case "Conoce tu talla":
+                        //System.out.println("Bienvenido al modulo para conocer tu talla");
+                        //System.out.println("Antes de comenzar indique si es hombre, mujer o Infante (H/M/I)");
+                        //String Sexo = respuesta.next();
+                        /*Mostrara una tabla segun sea el sexo del cliente o un infante */
+                        String data[] = {"Hombre", "Mujer", "Infante"};
+                        String Sexo = (String) JOptionPane.showInputDialog(null, 
+                        "Seleccione el catalogo que busca\n",
+                        "Conoce tu talla", 
+                        JOptionPane.DEFAULT_OPTION, null, data, data);
+    
+                        //System.out.println("Utiliza la regla que se te proporciona en el establecimiento");
+                    
+                        //System.out.println("tabla de tallas \n talla 1 \n talla 2\n talla 3\n"); //mostrar tabla de tallas de ninos
+                        if (Sexo == null|| Sexo == "") {
+                            caseNull();
+                            
+                        }else {
+                            if (Sexo.equals("Hombre")){
+            
+                                //System.out.println("Leon \n No ha hewcho\n La tabla"); 
+                                //muestra las tallas de hombre
+                                JOptionPane.showMessageDialog(null, "Aqui van los datos que va a hacer el miguel", "Talla Hombre",0);
+                            } else if (Sexo.equals("Mujer")) {
+    
+                                //System.out.println("talla 1 \n talla 2\n talla 3"); 
+                                //muestra las tallas de mujer
+                                JOptionPane.showMessageDialog(null, "Aqui van los datos que va a hacer el miguel", "Talla Mujer",0);
+                            }else{
+    
+                                //System.out.println("talla 1 \n talla 2\n talla 3"); 
+                                //muestra las tallas de infantes
+                                JOptionPane.showMessageDialog(null, "Aqui van los datos que va a hacer el miguel", "Talla Infante",0);
+                            }
                         }
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                        JOptionPane.showMessageDialog(null, "Tu codigo es invalido");
-                        /*En dado que no sea arroja una ventana donde dice que no es correcto y pregunta si desea continuar */
-                    }
-
-                break;
-
-                case "Salir":
-                        JOptionPane.showMessageDialog(null, "Vuelva Pronto", "Mensaje de Salida", JOptionPane.INFORMATION_MESSAGE);
-                        /*opcion de salir, termina el codigo con un mensaje de salida */
-                break;
-                default:
-                    JOptionPane.showMessageDialog(null,"Eres lo mas hermoso y bonito que me ha pasado en la vida amor\n te amo tanto y es enserio cuando lo digo y que eres mi princesa hermosa, preciosa, mi bb,\n mi todo mi amorcito\n TE AMOOOOOOOOOO!!!!!!!");
-                    /*Dedicatoria a la novia de Aya --Te Amoooooooo--*/
-                break;
-            }    
+                            
+        
+                    break;
+                   
+                    case "Canjear un codigo":
+                        
+                        /*Si la respuesta es si a tener un codigo de canje preguntara cual es y verificara 
+                        * si es igual al codigo de descuentos, sino arrojara otro mensaje
+                        */
+                        try {
+                            /*Try como su nombre lo indica se refiere a que intentara hacer lo que esta dentro de las llaves
+                             * de lo contrario realizara lo que se encuentra dentro del catch es decir la opcion por defectos
+                             */
+                            codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su codigo"));
+                            if (codigo == 277353 ||codigo ==54321){
+                                JOptionPane.showMessageDialog(null, "Codigo correcto");
+                            }else{
+                                JOptionPane.showMessageDialog(null, "Codigo invalido");
+                            }
+                        } catch (Exception e) {
+                            // TODO: handle exception
+                            JOptionPane.showMessageDialog(null, "Tu codigo es invalido");
+                            /*En dado que no sea arroja una ventana donde dice que no es correcto y pregunta si desea continuar */
+                        }
+    
+                    break;
+    
+                    case "Salir":
+                            JOptionPane.showMessageDialog(null, "Vuelva Pronto", "Mensaje de Salida", JOptionPane.INFORMATION_MESSAGE);
+                            /*opcion de salir, termina el codigo con un mensaje de salida */
+                    break;
+                    default:
+                        //JOptionPane.showMessageDialog(null,"Eres lo mas hermoso y bonito que me ha pasado en la vida amor\n te amo tanto y es enserio cuando lo digo y que eres mi princesa hermosa, preciosa, mi bb,\n mi todo mi amorcito\n TE AMOOOOOOOOOO!!!!!!!");
+                        /*Dedicatoria a la novia de Aya --Te Amoooooooo--*/
+                    break;
+                }    
+            }
+            
         }while (opcion!="Salir");
         //do while se refiere a repetir mientras la condicion se cumpla
         
@@ -339,9 +365,39 @@ public class Zapateria {
     //asi se escribe una funcion
     private static void caseNull() {
         JOptionPane.showMessageDialog(null, "Vuelva Pronto", "Adios Usuario", JOptionPane.CLOSED_OPTION);
-            /*Se compone de varias cosas el JOptionPane usamos null para nose, lo siguiente es el mensaje que queremos muestre
+            /*Se compone de varias cosas el JOptionPane usamos null para decir que por defecto se vea en el main, lo siguiente es el mensaje que queremos muestre
             y con eso tenemos un simple messagebox pero para poner titulo lo ponemos entreparentesis seguido de la coma, y despues usamos
             el tipo de mensaje que es, ya que al tener titulo necesita un icono, por ejemplo advertencia, info, salir, aceptar etc. */    
+    }
+
+    //asi se escribe una funcion
+    private static void pagar(int NumArray, int PreciosProductos[], String NombProductos[], double Total) {
+        
+        String ProductosPagar[];
+        ProductosPagar = new String[NumArray];
+
+        int NumProducts[];
+        NumProducts = new int[NumArray];
+
+        int Precios[];
+        Precios = new int[NumArray];
+        JFrame pagar = new JFrame("Pasos para pagar");
+
+            JTextField Mensaje = new JTextField("Soy un txt");
+            Mensaje.setBounds(100,100,100,30);
+            Mensaje.setVisible(true);
+
+            String Mensaje3 = "Son " + Integer.toString(NumArray) + " con total de " + String.valueOf(Total);
+            JLabel Mensaje2 = new JLabel(Mensaje3);
+            Mensaje2.setBounds(100,200,150,30);
+            Mensaje2.setVisible(true);
+            
+            //JOptionPane.showMessageDialog(null, Total + NumArray, "Pago", JOptionPane.CLOSED_OPTION);
+
+        pagar.add(Mensaje);
+        pagar.add(Mensaje2);
+        pagar.setSize(500,500);
+        pagar.setVisible(true);
     }
 
 }
